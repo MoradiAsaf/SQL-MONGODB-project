@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מערכת BI - שאילתות</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>מערכת BI - שאילתות</h1>
+    </header>
+    
+    <main>
+        <section id="query-selection">
+            <h2>בחר שאילתא:</h2>
+            <select id="query-list">
+                <option value="">בחר שאילתא</option>
+            </select>
+            <button id="execute-query">הרץ שאילתא</button>
+        </section>
+
+        <section id="query-results">
+            <h2>תוצאות השאילתא</h2>
+            <table id="results-table">
+                <thead>
+                    <tr id="table-header"></tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+            </table>
+        </section>
+
+        <section id="ai-recommendations">
+            <h2>המלצות AI</h2>
+            <button id="get-recommendations">קבל המלצות</button>
+            <p id="ai-output"></p>
+        </section>
+    </main>
+    <button id="admin-btn" class="admin-button">🔑 Admin</button>
+
+
+
+    <div>
+        <h3>📂 הורדת קבצי מסד הנתונים</h3>
+        <button onclick="downloadFile('ERD.png')">📥 צפייה ב ERD</button>
+        <button onclick="downloadFile('schema.sql')">📥 הורד מסד נתונים (SQL)</button>
+        <button onclick="downloadFile('mongo_queries.json')">📥 צפייה בשאילתות MongoDB</button>
+    </div>
+    
+    <script>
+   function downloadFile(filename) {
+    window.location.href = `http://localhost:5000/files/${filename}`;
+}
+    </script>
+    
+
+    <script src="js/app.js"></script>
+    <script src="js/queryHandler.js"></script>
+</body>
+</html>
+

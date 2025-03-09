@@ -1,0 +1,217 @@
+// בחירת/יצירת מסד הנתונים
+use mydatabase;
+
+// יצירת אוסף (אופציונלי, לא הכרחי משום ש--insertMany יוצר אוסף אוטומטית)
+db.createCollection("advertisements");
+db.advertisements.insertMany([
+  {
+    ad_id: 1,
+    product_id: 1,
+    category_id: 1,
+    platform: "פייסבוק",
+    budget: 1000,
+    clicks: 150,
+    impressions: 5000,
+    conversion_rate: 3,
+    start_date: "2025-01-01",
+    end_date: "2025-01-30"
+  },
+  {
+    ad_id: 2,
+    product_id: 2,
+    category_id: 1,
+    platform: "גוגל",
+    budget: 2000,
+    clicks: 200,
+    impressions: 7000,
+    conversion_rate: 2.85,
+    start_date: "2025-01-01",
+    end_date: "2025-02-01"
+  },
+  {
+    ad_id: 3,
+    product_id: 3,
+    category_id: 2,
+    platform: "אינסטגרם",
+    budget: 500,
+    clicks: 100,
+    impressions: 2500,
+    conversion_rate: 4,
+    start_date: "2025-01-05",
+    end_date: "2025-01-20"
+  },
+  {
+    ad_id: 4,
+    product_id: 4,
+    category_id: 3,
+    platform: "טלוויזיה",
+    budget: 3000,
+    clicks: 300,
+    impressions: 10000,
+    conversion_rate: 3.2,
+    start_date: "2025-01-10",
+    end_date: "2025-01-25"
+  },
+  {
+    ad_id: 5,
+    product_id: 5,
+    category_id: 4,
+    platform: "פייסבוק",
+    budget: 1500,
+    clicks: 250,
+    impressions: 6000,
+    conversion_rate: 4.16,
+    start_date: "2025-01-15",
+    end_date: "2025-02-05"
+  }
+]);
+
+db.createCollection("ai_suggestions");
+db.ai_suggestions.insertMany([
+  { suggestion_id: 1,  suggestion_type: "פרסומות", related_id: 1,  ai_generated_text: "ההוצאה על פרסומות בפייסבוק מוכיחה את עצמה, מומלץ להמשיך להשקיע בהן",           created_at: "2025-02-20 12:51:10" },
+  { suggestion_id: 2,  suggestion_type: "מוצרים",   related_id: 2,  ai_generated_text: "מחשבים ניידים הם מוצרים עם ביקוש גבוה, כדאי להגדיל את המלאי ולהגביר את הפרסום",  created_at: "2025-02-20 12:51:10" },
+  { suggestion_id: 3,  suggestion_type: "לקוחות",   related_id: 3,  ai_generated_text: "לקוחות שנרשמו לאחרונה אינם רוכשים מספיק, ייתכן ויש צורך בשיפור ההמלצות או המחירים", created_at: "2025-02-20 12:51:10" },
+  { suggestion_id: 4,  suggestion_type: "הזמנות",   related_id: 4,  ai_generated_text: "הזמנות גדולות יותר מגיעות לעיתים קרובות יותר מקטגוריית הריהוט, כדאי להוסיף מוצרים חדשים", created_at: "2025-02-20 12:51:10" },
+  { suggestion_id: 5,  suggestion_type: "ביקורות",  related_id: 5,  ai_generated_text: "הביקורות על הספר מצוינות, כדאי להמשיך לקדם את המוצר הזה על פלטפורמות נוספות",     created_at: "2025-02-20 12:51:10" },
+  { suggestion_id: 6,  suggestion_type: "פרסום",    related_id: 1,  ai_generated_text: "הגבר את התקציב ל-Google Ads כדי לשפר את המכירות",                         created_at: "2025-02-20 18:27:40" },
+  { suggestion_id: 7,  suggestion_type: "מלאי",     related_id: 2,  ai_generated_text: "המוצר נמכר מהר, מומלץ להזמין עוד יחידות",                                     created_at: "2025-02-20 18:27:40" },
+  { suggestion_id: 8,  suggestion_type: "שירות לקוחות", related_id: 3, ai_generated_text: "לקוחות מתלוננים על איכות המוצר, כדאי לבדוק",                               created_at: "2025-02-20 18:27:40" },
+  { suggestion_id: 9,  suggestion_type: "פרסום",    related_id: 4,  ai_generated_text: "קמפיין ה-TikTok מניב תוצאות טובות, כדאי להמשיך",                           created_at: "2025-02-20 18:27:40" },
+  { suggestion_id: 10, suggestion_type: "שיווק",    related_id: 5,  ai_generated_text: "לקוחות מבקשים צבעים נוספים למוצר זה",                                      created_at: "2025-02-20 18:27:40" },
+  { suggestion_id: 11, suggestion_type: "שירות",    related_id: 6,  ai_generated_text: "משלוחים מתעכבים, כדאי לבדוק",                                              created_at: "2025-02-20 18:27:40" },
+  { suggestion_id: 12, suggestion_type: "מבצע",     related_id: 7,  ai_generated_text: "מוצר זה נמכר טוב במבצעי הנחה",                                              created_at: "2025-02-20 18:27:40" },
+  { suggestion_id: 13, suggestion_type: "שירות",    related_id: 8,  ai_generated_text: "בקשות להחזרות רבות, יש לבדוק",                                             created_at: "2025-02-20 18:27:40" },
+  { suggestion_id: 14, suggestion_type: "שיווק",    related_id: 9,  ai_generated_text: "מומלץ לפרסם חוות דעת של לקוחות מרוצים",                                     created_at: "2025-02-20 18:27:40" },
+  { suggestion_id: 15, suggestion_type: "פרסום",    related_id: 10, ai_generated_text: "הפרסומת ביוטיוב הביאה גידול במכירות",                                       created_at: "2025-02-20 18:27:40" }
+]);
+
+db.createCollection("categories");
+db.categories.insertMany([
+  { category_id: 1,  category_name: "אלקטרוניקה" },
+  { category_id: 2,  category_name: "ביגוד" },
+  { category_id: 3,  category_name: "ריהוט" },
+  { category_id: 4,  category_name: "מזון" },
+  { category_id: 5,  category_name: "ספרים" },
+  { category_id: 6,  category_name: "מחשבים" },
+  { category_id: 7,  category_name: "טלפונים" },
+  { category_id: 8,  category_name: "אביזרים לרכב" },
+  { category_id: 9,  category_name: "ביגוד" },
+  { category_id: 10, category_name: "הנעלה" },
+  { category_id: 11, category_name: "ריהוט" },
+  { category_id: 12, category_name: "ציוד משרדי" },
+  { category_id: 13, category_name: "כלי עבודה" },
+  { category_id: 14, category_name: "צעצועים" },
+  { category_id: 15, category_name: "אלקטרוניקה" }
+]);
+
+db.createCollection("customers");
+db.customers.insertMany([
+  { customer_id: 1,  name: "רמי לוי",     email: "rami@levi.com",     phone: "050-1234567",  address: "תל אביב",                     registration_date: "2025-02-20 14:05:37" },
+  { customer_id: 2,  name: "מירי כהן",    email: "miri@cohen.com",    phone: "052-2345678",  address: "חיפה",                        registration_date: "2025-02-20 14:05:37" },
+  { customer_id: 3,  name: "יוסי לוי",    email: "yossi@levi.com",    phone: "054-3456789",  address: "ירושלים",                     registration_date: "2025-02-20 14:05:37" },
+  { customer_id: 4,  name: "דנה ברק",     email: "dana@barak.com",    phone: "053-4567890",  address: "תל אביב",                     registration_date: "2025-02-20 14:05:37" },
+  { customer_id: 5,  name: "משה ישראלי", email: "moshe@israeli.com",  phone: "051-5678901",  address: "נתניה",                       registration_date: "2025-02-20 14:05:37" },
+  { customer_id: 6,  name: "אייל כהן",    email: "eyal@example.com",   phone: "054-1111111",  address: "רחוב הרצל 10, תל אביב",       registration_date: "2025-02-20 18:27:39" },
+  { customer_id: 7,  name: "נועה לוי",    email: "noa@example.com",    phone: "052-2222222",  address: "רחוב דיזנגוף 50, תל אביב",    registration_date: "2025-02-20 18:27:39" },
+  { customer_id: 8,  name: "דוד ישראלי", email: "david@example.com",  phone: "050-3333333",  address: "שדרות רוטשילד 20, תל אביב",   registration_date: "2025-02-20 18:27:39" },
+  { customer_id: 9,  name: "מיכל פרידמן", email: "michal@example.com", phone: "058-4444444",  address: "רחוב הרצל 15, חיפה",          registration_date: "2025-02-20 18:27:39" },
+  { customer_id: 10, name: "רוני ברק",    email: "roni@example.com",   phone: "053-5555555",  address: "רחוב הגפן 7, ירושלים",         registration_date: "2025-02-20 18:27:39" },
+  { customer_id: 11, name: "עמית ששון",   email: "amit@example.com",   phone: "057-6666666",  address: "רחוב הארזים 12, נתניה",        registration_date: "2025-02-20 18:27:39" },
+  { customer_id: 12, name: "תמר שחר",     email: "tamar@example.com",  phone: "056-7777777",  address: "רחוב האלונים 8, רחובות",      registration_date: "2025-02-20 18:27:39" },
+  { customer_id: 13, name: "אריאל זיו",   email: "ariel@example.com",  phone: "055-8888888",  address: "רחוב הברושים 5, באר שבע",     registration_date: "2025-02-20 18:27:39" },
+  { customer_id: 14, name: "יונתן חן",    email: "yonatan@example.com",phone: "054-9999999",  address: "רחוב הנשיא 3, רעננה",          registration_date: "2025-02-20 18:27:39" },
+  { customer_id: 15, name: "סיון מזרחי", email: "sivan@example.com",  phone: "052-1010101",  address: "רחוב השקמה 22, ראשון לציון",   registration_date: "2025-02-20 18:27:39" }
+]);
+
+db.createCollection("order_items");
+db.order_items.insertMany([
+  { order_item_id: 1,  order_id: 1,  product_id: 1,  quantity: 1,  price_at_purchase: 1500 },
+  { order_item_id: 2,  order_id: 1,  product_id: 2,  quantity: 1,  price_at_purchase: 3500 },
+  { order_item_id: 3,  order_id: 2,  product_id: 5,  quantity: 1,  price_at_purchase: 5 },
+  { order_item_id: 4,  order_id: 3,  product_id: 1,  quantity: 2,  price_at_purchase: 1500 },
+  { order_item_id: 5,  order_id: 4,  product_id: 3,  quantity: 1,  price_at_purchase: 2500 },
+  { order_item_id: 6,  order_id: 4,  product_id: 4,  quantity: 1,  price_at_purchase: 200 },
+  { order_item_id: 7,  order_id: 5,  product_id: 5,  quantity: 2,  price_at_purchase: 5 },
+  { order_item_id: 8,  order_id: 1,  product_id: 1,  quantity: 1,  price_at_purchase: 3500 },
+  { order_item_id: 9,  order_id: 2,  product_id: 2,  quantity: 1,  price_at_purchase: 2800 },
+  { order_item_id: 10, order_id: 3,  product_id: 3,  quantity: 2,  price_at_purchase: 120 },
+  { order_item_id: 11, order_id: 4,  product_id: 4,  quantity: 3,  price_at_purchase: 80 },
+  { order_item_id: 12, order_id: 5,  product_id: 5,  quantity: 1,  price_at_purchase: 320 },
+  { order_item_id: 13, order_id: 6,  product_id: 6,  quantity: 1,  price_at_purchase: 550 },
+  { order_item_id: 14, order_id: 7,  product_id: 7,  quantity: 5,  price_at_purchase: 15 },
+  { order_item_id: 15, order_id: 8,  product_id: 8,  quantity: 1,  price_at_purchase: 230 },
+  { order_item_id: 16, order_id: 9,  product_id: 9,  quantity: 1,  price_at_purchase: 200 },
+  { order_item_id: 17, order_id: 10, product_id: 10, quantity: 2,  price_at_purchase: 150 }
+]);
+
+db.createCollection("orders");
+db.orders.insertMany([
+  { order_id: 1,  customer_id: 1,  total_price: 3500, payment_method: "כרטיס אשראי",   order_date: "2025-02-20 12:59:06" },
+  { order_id: 2,  customer_id: 2,  total_price: 500,  payment_method: "פייפל",        order_date: "2025-02-20 12:59:06" },
+  { order_id: 3,  customer_id: 3,  total_price: 1200, payment_method: "העברה בנקאית", order_date: "2025-02-20 12:59:06" },
+  { order_id: 4,  customer_id: 4,  total_price: 2200, payment_method: "כרטיס אשראי",   order_date: "2025-02-20 12:59:06" },
+  { order_id: 5,  customer_id: 5,  total_price: 150,  payment_method: "פייפל",        order_date: "2025-02-20 12:59:06" },
+  { order_id: 16, customer_id: 1,  total_price: 3500, payment_method: "כרטיס אשראי",   order_date: "2025-02-20 18:27:39" },
+  { order_id: 17, customer_id: 2,  total_price: 2800, payment_method: "ביט",          order_date: "2025-02-20 18:27:39" },
+  { order_id: 18, customer_id: 3,  total_price: 120,  payment_method: "העברה בנקאית", order_date: "2025-02-20 18:27:39" },
+  { order_id: 19, customer_id: 4,  total_price: 80,   payment_method: "כרטיס אשראי",   order_date: "2025-02-20 18:27:39" },
+  { order_id: 20, customer_id: 5,  total_price: 320,  payment_method: "פייפאל",       order_date: "2025-02-20 18:27:39" },
+  { order_id: 21, customer_id: 6,  total_price: 550,  payment_method: "מזומן",        order_date: "2025-02-20 18:27:39" },
+  { order_id: 22, customer_id: 7,  total_price: 15,   payment_method: "כרטיס אשראי",   order_date: "2025-02-20 18:27:39" },
+  { order_id: 23, customer_id: 8,  total_price: 230,  payment_method: "ביט",          order_date: "2025-02-20 18:27:39" },
+  { order_id: 24, customer_id: 9,  total_price: 200,  payment_method: "מזומן",        order_date: "2025-02-20 18:27:39" },
+  { order_id: 25, customer_id: 10, total_price: 150,  payment_method: "פייפאל",       order_date: "2025-02-20 18:27:39" }
+]);
+
+db.createCollection("products");
+db.products.insertMany([
+  { product_id: 1,  name: "טלפון סלולרי",    category_id: 1,  price: 1500, stock: 100, created_at: "2025-02-20 12:51:10" },
+  { product_id: 2,  name: "מחשב נייד",       category_id: 1,  price: 3500, stock: 50,  created_at: "2025-02-20 12:51:10" },
+  { product_id: 3,  name: "מעיל חורף",       category_id: 2,  price: 200,  stock: 150, created_at: "2025-02-20 12:51:10" },
+  { product_id: 4,  name: "ספה עור",         category_id: 3,  price: 2500, stock: 20,  created_at: "2025-02-20 12:51:10" },
+  { product_id: 5,  name: "לחם",             category_id: 4,  price: 5,    stock: 500, created_at: "2025-02-20 12:51:10" },
+  { product_id: 6,  name: "ספר פיתוח אישי",  category_id: 5,  price: 50,   stock: 200, created_at: "2025-02-20 12:51:10" },
+  { product_id: 7,  name: "מחשב נייד דל",    category_id: 1,  price: 3500, stock: 10,  created_at: "2025-02-20 18:27:39" },
+  { product_id: 8,  name: "טלפון סמסונג S22",category_id: 2,  price: 2800, stock: 15,  created_at: "2025-02-20 18:27:39" },
+  { product_id: 9,  name: "מטען נייד לרכב",  category_id: 3,  price: 120,  stock: 30,  created_at: "2025-02-20 18:27:39" },
+  { product_id: 10, name: "חולצת פולו",      category_id: 4,  price: 80,   stock: 25,  created_at: "2025-02-20 18:27:39" },
+  { product_id: 11, name: "נעלי ספורט נייק",category_id: 5,  price: 320,  stock: 20,  created_at: "2025-02-20 18:27:39" },
+  { product_id: 12, name: "שולחן עבודה",     category_id: 6,  price: 550,  stock: 8,   created_at: "2025-02-20 18:27:39" },
+  { product_id: 13, name: "עטים ג׳ל",        category_id: 7,  price: 15,   stock: 100, created_at: "2025-02-20 18:27:39" },
+  { product_id: 14, name: "מברגה חשמלית",    category_id: 8,  price: 230,  stock: 12,  created_at: "2025-02-20 18:27:39" },
+  { product_id: 15, name: "לגו סט קלאסי",    category_id: 9,  price: 200,  stock: 18,  created_at: "2025-02-20 18:27:39" },
+  { product_id: 16, name: "אוזניות אלחוטיות",category_id: 10, price: 150,  stock: 22,  created_at: "2025-02-20 18:27:39" }
+]);
+
+db.createCollection("reviews");
+db.reviews.insertMany([
+  { review_id: 1,  customer_id: 1,  product_id: 1,  rating: 5, comment: "מעולה, עובד מצוין!",               image_url: "https://example.com/images/phone.jpg", created_at: "2025-02-20 12:51:10" },
+  { review_id: 2,  customer_id: 2,  product_id: 2,  rating: 4, comment: "מחשב מעולה אך יקר מדי",           image_url: "https://example.com/images/laptop.jpg", created_at: "2025-02-20 12:51:10" },
+  { review_id: 3,  customer_id: 3,  product_id: 3,  rating: 3, comment: "ספה נוחה אך לא מתאימה לסלון שלי", image_url: "https://example.com/images/sofa.jpg",   created_at: "2025-02-20 12:51:10" },
+  { review_id: 4,  customer_id: 4,  product_id: 4,  rating: 5, comment: "לחם טרי וטעים",                   image_url: "https://example.com/images/bread.jpg",  created_at: "2025-02-20 12:51:10" },
+  { review_id: 5,  customer_id: 5,  product_id: 5,  rating: 4, comment: "ספר מעורר השראה",                 image_url: "https://example.com/images/book.jpg",   created_at: "2025-02-20 12:51:10" },
+  { review_id: 6,  customer_id: 1,  product_id: 1,  rating: 5, comment: "מחשב מעולה!",                     image_url: null, created_at: "2025-02-20 18:27:40" },
+  { review_id: 7,  customer_id: 2,  product_id: 2,  rating: 4, comment: "טלפון נחמד, אבל הסוללה חלשה",     image_url: null, created_at: "2025-02-20 18:27:40" },
+  { review_id: 8,  customer_id: 3,  product_id: 3,  rating: 5, comment: "מוצר מצוין במחיר זול",            image_url: null, created_at: "2025-02-20 18:27:40" },
+  { review_id: 9,  customer_id: 4,  product_id: 4,  rating: 3, comment: "הבד איכותי אך קצת קטן",           image_url: null, created_at: "2025-02-20 18:27:40" },
+  { review_id: 10, customer_id: 5,  product_id: 5,  rating: 5, comment: "נעליים מאוד נוחות",              image_url: null, created_at: "2025-02-20 18:27:40" },
+  { review_id: 11, customer_id: 6,  product_id: 6,  rating: 4, comment: "שולחן יציב, קל להרכבה",           image_url: null, created_at: "2025-02-20 18:27:40" },
+  { review_id: 12, customer_id: 7,  product_id: 7,  rating: 5, comment: "עטים טובים, מחזיקים הרבה זמן",    image_url: null, created_at: "2025-02-20 18:27:40" },
+  { review_id: 13, customer_id: 8,  product_id: 8,  rating: 4, comment: "מברגה עוצמתית, אבל הסוללה לא מחזיקה הרבה", image_url: null, created_at: "2025-02-20 18:27:40" },
+  { review_id: 14, customer_id: 9,  product_id: 9,  rating: 5, comment: "הילד שלי נהנה מאוד מהלגו הזה!",   image_url: null, created_at: "2025-02-20 18:27:40" },
+  { review_id: 15, customer_id: 10, product_id: 10, rating: 5, comment: "אוזניות נוחות עם סאונד מעולה",    image_url: null, created_at: "2025-02-20 18:27:40" }
+]);
+
+db.createCollection("users");
+db.users.insertMany([
+  {
+    id: 1,
+    name: "Admin",
+    username: "admin",
+    password: "$2b$10$cjCLsRCOHKjoSbllq0oNrOwtkjgwednBaYfXF3G4iuw1i2VFgo4hi",
+    role: "admin",
+    secret_code: "SuperSecretCode123"
+  }
+]);
+
+print("Done importing all collections!");

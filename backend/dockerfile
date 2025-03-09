@@ -1,0 +1,32 @@
+# שימוש ב-Node.js בגרסת Alpine
+FROM node:18-alpine
+
+# התקנת ספריות הדרושות ל-SQLite3 ול-Node-Gyp
+RUN apk add --no-cache \
+  sqlite \
+  sqlite-libs \
+  python3 \
+  py3-pip \
+  py3-setuptools \
+  make \
+  g++
+
+
+# יצירת תיקיית העבודה
+WORKDIR /app
+
+# העתקת קבצי החבילות
+COPY package.json ./
+
+RUN npm install express
+# התקנת כל התלויות (כולל sqlite3) מבפנים
+RUN npm install --build-from-source
+
+# העתקת שאר קבצי הקוד
+COPY . .
+
+# פתיחת פורט לשרת
+EXPOSE 5000
+
+# הפעלת השרת
+CMD ["node", "server.js"]

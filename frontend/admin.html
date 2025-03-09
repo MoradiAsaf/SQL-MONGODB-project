@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ניהול מערכת - ADMIN</title>
+    <link rel="stylesheet" href="./css/admin.css">
+    <script defer src="./js/admin.js"></script>
+</head>
+<body>
+
+    <!-- 🔐 מסך התחברות -->
+    <div id="login-container">
+        <h1>כניסת מנהל</h1>
+        <input type="text" id="admin-username" placeholder="שם משתמש">
+        <input type="password" id="admin-password" placeholder="סיסמה">
+        <button onclick="adminLogin()">התחבר</button>
+        <p id="login-message" class="error"></p>
+    </div>
+
+    <!-- 🎛 מסך ניהול (מוסתר עד התחברות) -->
+    <div id="admin-panel" style="display: none;">
+        <h1>ניהול מערכת</h1>
+
+        <!-- 🔘 תפריט בחירה -->
+        <div class="menu">
+            <button onclick="toggleSection('users-section')">👤 ניהול משתמשים</button>
+            <button onclick="toggleSection('query-section')">📝 הרצת שאילתות</button>
+            <button onclick="toggleSection('migration-section')">🔄 המרת מסד נתונים</button>
+        </div>
+
+        <!-- 👥 ניהול משתמשים -->
+        <div id="users-section" class="section">
+            <h2>ניהול משתמשים</h2>
+            <input type="text" id="new-username" placeholder="שם משתמש">
+            <input type="password" id="new-password" placeholder="סיסמה">
+            <select id="new-role">
+                <option value="user">משתמש</option>
+                <option value="manager">מנהל</option>
+                <option value="admin">אדמין</option>
+            </select>
+            <button onclick="addUser()">➕ הוסף משתמש</button>
+            <p id="user-message"></p>
+        </div>
+
+        <!-- 📝 הרצת שאילתות -->
+        <div id="query-section" class="section">
+            <h2>הרצת שאילתות</h2>
+            <textarea id="query-input" placeholder="כתוב שאילתא כאן..."></textarea>
+            <button onclick="executeQuery()">🚀 בצע שאילתא</button>
+            <pre id="query-result"></pre>
+        </div>
+
+        <!-- 🔄 המרת מסד נתונים -->
+        <div id="migration-section" class="section">
+            <h2>המרת מסד נתונים</h2>
+            <input type="password" id="secret-code" placeholder="קוד סודי">
+            <button onclick="migrateDatabase()">🔄 המר למסד MongoDB</button>
+            <p id="migration-message"></p>
+        </div>
+    </div>
+
+</body>
+</html>
