@@ -1,6 +1,5 @@
 # Final Project 2025 🚀
 
-זהו הפרויקט הסופי שלך לשנת 2025, המכיל מערכת **Dockerized** עם `docker-compose.yml` שמנהל את ה-Backend וה-Frontend.
 
 ## 📦 מבנה הפרויקט
 ```
@@ -75,5 +74,4 @@ docker-compose down
 ---
 
 
-🎉 **בהצלחה עם הפרויקט!** 🚀
 
